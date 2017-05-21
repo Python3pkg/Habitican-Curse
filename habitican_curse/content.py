@@ -10,14 +10,14 @@ import math
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import menu as M
-import task as T
-import debug as DEBUG
-import user as U
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import menu as M
+from . import task as T
+from . import debug as DEBUG
+from . import user as U
 
 #Set up logging
 import logging
@@ -78,7 +78,7 @@ class Party(object):
             self.questType = ""
             self.progress = 0
 
-            if self.questDetails.has_key('boss'):
+            if 'boss' in self.questDetails:
                 self.questType     = "boss"
                 self.bossMaxHealth = self.questDetails['boss']['hp']
                 self.bossName      = self.questDetails['boss']['name']
@@ -88,7 +88,7 @@ class Party(object):
                 if(party['quest']['active']):
                     self.progress      = int(round(party['quest']['progress']['hp'],0))
 
-            elif self.questDetails.has_key('collect'):
+            elif 'collect' in self.questDetails:
                 self.questType     = "collect"
                 self.questItems    = self.questDetails['collect']
 
@@ -120,7 +120,7 @@ class Party(object):
             elif self.questType == "collect":
                 # Display Collect Statistics
                 disp_string = "Collect "
-                for (key, value) in self.questItems.items():
+                for (key, value) in list(self.questItems.items()):
                     disp_string += value['text'].encode("utf-8") + " : " + str(self.progress[key]) + "/" + str(value['count']) + " "
 
                 G.screen.Display(disp_string, MAX_X, Y,
@@ -135,13 +135,13 @@ class Party(object):
 
 def CheckDrops(response):
     drop = None
-    if response.has_key('drop'):
+    if 'drop' in response:
         logger.debug("  Found a drop!\n%s" % str(response))
-        if response['drop'].has_key('dialog'):
+        if 'dialog' in response['drop']:
             drop=str(response['drop']['dialog'].encode("utf-8"))
-        elif response['drop'].has_key('text'):
+        elif 'text' in response['drop']:
             drops=str(response['drop']['text'].encode("utf-8"))
-        elif response['drop'].has_key('notes'):
+        elif 'notes' in response['drop']:
             drop=str(response['drop']['notes'].encode("utf-8"))
 
     return drop
@@ -210,7 +210,7 @@ def GetData():
         # Due To Boss
         if quest != {}:
             bossDamage = damage
-            if questDetails.has_key('boss'):
+            if 'boss' in questDetails:
                 if daily['priority'] < 1:
                     bossDamage *= daily['priority']
 
@@ -228,9 +228,9 @@ def GetData():
                   "Est. Damage to Boss: "+str(userDamageBoss)]
 
     # Collection statistics if it is a collect quest
-    if questDetails.has_key('collect'):
+    if 'collect' in questDetails:
         disp_string = "You have found "
-        for (key, value) in quest['progress']['collect'].items():
+        for (key, value) in list(quest['progress']['collect'].items()):
             disp_string += str(value) + " " + questDetails['collect'][key]['text'] + " "
         data_items += [disp_string]
 

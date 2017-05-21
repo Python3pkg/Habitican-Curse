@@ -3,9 +3,9 @@
 """
 
 # Custom module imports
-import screen as Screen
-import global_objects as G
-import config as C
+from . import screen as Screen
+from . import global_objects as G
+from . import config as C
 import logging
 
 #Initialize the logging facility

@@ -9,12 +9,12 @@ import uuid
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import menu as M
-import debug as DEBUG
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import menu as M
+from . import debug as DEBUG
 
 #Set up logging
 import logging
@@ -74,9 +74,9 @@ def ChecklistMenu(checklist):
 def DummyChecklistItem():
     # Return an "Add an item"-named dummy checklist item
     newItem = {}
-    newItem[u'text']      = u'Add New Item'
-    newItem[u'completed'] = False
-    newItem[u'id']        = str(uuid.uuid4())
+    newItem['text']      = 'Add New Item'
+    newItem['completed'] = False
+    newItem['id']        = str(uuid.uuid4())
     return M.MenuItem(ChecklistItem(newItem), 'checklist', newItem['text'], width=(C.SCR_Y-20))
 
 
@@ -96,7 +96,7 @@ class Task(object):
         self.dateCreated  = H.DateTime(str(data['createdAt']))
         self.priority     = data['priority']
         self.value        = data['value']
-        self.isChallenge = data.has_key('challenge') and data['challenge'] != {}
+        self.isChallenge = 'challenge' in data and data['challenge'] != {}
 
         # Derived Details
         self.color       = ValueToColor(self.value)
@@ -315,7 +315,7 @@ class TODO(Task):
         self.completed = data['completed']
         self.checklist = data['checklist']
 
-        if data.has_key('date') and data['date'] != "" and data['date'] != None: # Due Date Stuff
+        if 'date' in data and data['date'] != "" and data['date'] != None: # Due Date Stuff
             self.dueDate = H.DateTime(str(data['date'])).DueDateFormat()
             self.date    = str(data['date'])
         else:
@@ -336,7 +336,7 @@ class TODO(Task):
         self.date = str(self.data['date'])
 
     def RemoveDueDate(self):
-        if self.data.has_key('date'):
+        if 'date' in self.data:
             self.data['date'] = ""
         else:
             logger.warn('Trying to delete due date from task without one!')

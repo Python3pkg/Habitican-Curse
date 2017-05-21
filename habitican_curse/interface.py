@@ -7,13 +7,13 @@ import curses
 import shlex # For parsing
 
 # Custom Module Imports
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import menu as M
-import debug as DEBUG
-import content as CT
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import menu as M
+from . import debug as DEBUG
+from . import content as CT
 
 #Set up logging
 import logging
@@ -48,7 +48,7 @@ class Interface(object):
         G.TODOMenu.Init()
 
         # Borders
-        G.screen.Display(u'\u2550'.encode('utf-8')*C.SCR_Y, 14, 0,bold=True,color=C.SCR_COLOR_WHITE)
+        G.screen.Display('\u2550'.encode('utf-8')*C.SCR_Y, 14, 0,bold=True,color=C.SCR_COLOR_WHITE)
 
         # User Stats
         G.user.PrintData()
@@ -60,7 +60,7 @@ class Interface(object):
         # Used for scrolling
         self.trinity = [G.HabitMenu, G.DailyMenu, G.TODOMenu]
         self.currentMenu = 0
-        for i in xrange(0, 3):
+        for i in range(0, 3):
             if not self.trinity[i].IsEmpty():
                 self.currentMenu = i
                 break

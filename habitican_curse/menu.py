@@ -10,12 +10,12 @@ import time
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import debug as DEBUG
-import task as T
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import debug as DEBUG
+from . import task as T
 
 def truncate(string, size):
     return (string[:size-3]+"...") if len(string)>size else string
@@ -327,7 +327,7 @@ class Menu(object):
         X += 2
         G.screen.ScrollBar(X, Y-2, self.start, self.end, len(self.items), self.rows)
 
-        for i in xrange(self.start, self.end):
+        for i in range(self.start, self.end):
             self.items[i].SetXY(X, Y)
             self.items[i].DisplayName()
 
@@ -587,7 +587,7 @@ class SimpleTextMenu(object):
 
         G.screen.ScrollBar(X, C.SCR_Y-5, self.start, self.end, len(self.text), self.num_rows)
 
-        for i in xrange(self.start, self.end):
+        for i in range(self.start, self.end):
             if self.text[i][:3] == "---" or self.text[i][0] == "#":
                 G.screen.Display(self.text[i], X, Y,
                         color=C.SCR_COLOR_LIGHT_GRAY, bold=True)

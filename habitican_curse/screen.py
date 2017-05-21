@@ -10,8 +10,8 @@ import math
 import threading
 
 # Custom Module Imports
-import config as C
-import debug as DEBUG
+from . import config as C
+from . import debug as DEBUG
 
 #Set up logging
 import logging
@@ -26,7 +26,7 @@ class Screen(object):
         # These are special context registers.
         # Use these to store some important backtrack points.
         self.ctxts = []
-        for i in xrange(C.NUM_CONTEXT_REGISTERS):
+        for i in range(C.NUM_CONTEXT_REGISTERS):
             self.ctxts += [tempfile.TemporaryFile()]
 
         self.active_registers = [False]*C.NUM_CONTEXT_REGISTERS
@@ -145,7 +145,7 @@ class Screen(object):
 
         #Does it need to be struck out?
         if(strike):
-            string = u'\u0336'.encode("utf-8").join(string) + u'\u0336'.encode("utf-8")
+            string = '\u0336'.encode("utf-8").join(string) + '\u0336'.encode("utf-8")
 
         if(highlight):
             bold = True
@@ -189,7 +189,7 @@ class Screen(object):
         curses.curs_set(0)
 
     def ClearRegion(self, x1, x2, y1, y2):
-        for i in xrange(x1, x2):
+        for i in range(x1, x2):
             self.Display(" "*(y2 - y1), i, y1)
 
     def ClearTextArea(self):
@@ -265,16 +265,16 @@ class Screen(object):
 
         starting = X
         ending   = X + rows
-        for i in xrange(start_space):
+        for i in range(start_space):
             self.Display(" ", X+i, Y, color=C.SCR_COLOR_WHITE_GRAY_BGRD,bold=True)
             starting = X + i
 
-        for i in xrange(end_space):
+        for i in range(end_space):
             self.Display(" ",X+rows-1-i, Y,
                              color=C.SCR_COLOR_WHITE_GRAY_BGRD,bold=True)
             ending = X + rows - 1 - i
 
-        for i in xrange(starting, ending):
+        for i in range(starting, ending):
             self.Display(" ",i, Y,color=C.SCR_COLOR_GRAY_WHITE_BGRD, bold=True)
 
         self.Release()

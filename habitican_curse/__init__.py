@@ -7,12 +7,12 @@ import threading
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import menu as M
-import request_manager as RM
-import interface as I
-import content as CT
-import debug as DEBUG
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import menu as M
+from . import request_manager as RM
+from . import interface as I
+from . import content as CT
+from . import debug as DEBUG

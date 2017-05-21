@@ -12,12 +12,12 @@ from dateutil import tz, relativedelta
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import debug as DEBUG
-import content as CT
-import menu as M
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import debug as DEBUG
+from . import content as CT
+from . import menu as M
 
 #Set up logging
 import logging
@@ -103,7 +103,7 @@ class Status(object):
             Y -= 2
 
 
-        for (key, value) in self.attributes.items():
+        for (key, value) in list(self.attributes.items()):
 
             if key == C.SYMBOL_DELETE or key == C.SYMBOL_EDIT:
                 #Edit status is always shown first
@@ -315,7 +315,7 @@ def GetUserStats(data):
               stats['buffs']['int'] +    # Buffed
               min(stats['lvl'],100)/2)   # Level Bonus
 
-    for i in gear.values():
+    for i in list(gear.values()):
         gearStats = G.content.Equipment(i)
         if ((gearStats['klass'] == userClass) or
                 (gearStats['klass'] == "special" and gearStats.get('specialClass', '') == userClass)):
@@ -328,7 +328,7 @@ def GetUserStats(data):
                stats['buffs']['per'] +   # Buffed
                min(stats['lvl'],100)/2)  # Level Bonus
 
-    for i in gear.values():
+    for i in list(gear.values()):
         gearStats = G.content.Equipment(i)
         if ((gearStats['klass'] == userClass) or
                 (gearStats['klass'] == "special" and gearStats.get('specialClass', '') == userClass)):
@@ -341,7 +341,7 @@ def GetUserStats(data):
                stats['buffs']['str'] +   # Buffed
                min(stats['lvl'],100)/2)  # Level Bonus
 
-    for i in gear.values():
+    for i in list(gear.values()):
         gearStats = G.content.Equipment(i)
         if ((gearStats['klass'] == userClass) or
                 (gearStats['klass'] == "special" and gearStats.get('specialClass', '') == userClass)):
@@ -354,7 +354,7 @@ def GetUserStats(data):
                stats['buffs']['con'] +   # Buffed
                min(stats['lvl'],100)/2)  # Level Bonus
 
-    for i in gear.values():
+    for i in list(gear.values()):
         gearStats = G.content.Equipment(i)
         if ((gearStats['klass'] == userClass) or
                 (gearStats['klass'] == "special" and gearStats.get('specialClass', '') == userClass)):
@@ -431,7 +431,7 @@ def RepeatPicker(original=C.DEFAULT_REPEAT):
     while(1):
         dY = Y
         G.screen.Display("Set Weekly: ", X-1, Y,bold=True)
-        for i in xrange(7):
+        for i in range(7):
             if i == current:
                 if newRepeat[sequence[i]]:
                     G.screen.Display(translate[sequence[i]], X, dY,

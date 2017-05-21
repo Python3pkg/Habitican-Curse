@@ -11,14 +11,14 @@ import datetime
 
 # Custom Module Imports
 
-import config as C
-from screen import Screen
-import global_objects as G
-import helper as H
-import menu as M
-import task as T
-import debug as DEBUG
-import user as U
+from . import config as C
+from .screen import Screen
+from . import global_objects as G
+from . import helper as H
+from . import menu as M
+from . import task as T
+from . import debug as DEBUG
+from . import user as U
 
 #Set up logging
 import logging
@@ -55,7 +55,7 @@ class RequestManager(object):
 
         if(method == 'get'):
             url+="?"
-            for param, value in params.iteritems():
+            for param, value in params.items():
                 url+=param + "=" + value
 
         logger.warn("Calling V3 API: %s" % url)
@@ -246,7 +246,7 @@ class RequestManager(object):
     def Flush(self,flush_for_quit=False):
 
         #TODO: most of this should not happen in the request manager
-        import content as CT
+        from . import content as CT
 
         DEBUG.Display("Please Wait...")
 

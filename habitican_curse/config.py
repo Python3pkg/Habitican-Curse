@@ -50,19 +50,19 @@ SCR_COLOR_BGRD = curses.COLOR_BLACK
 SCR_COLOR_NEUTRAL = SCR_COLOR_LIGHT_GRAY
 
 # Special Symbols
-SYMBOL_TICK = u'\u2714'.encode("utf-8")
-SYMBOL_DISC = u'\u25CF'.encode("utf-8")
-SYMBOL_DOWN_TRIANGLE = u'\u25BC'.encode("utf-8")
-SYMBOL_UP_TRIANGLE = u'\u25B2'.encode("utf-8")
+SYMBOL_TICK = '\u2714'.encode("utf-8")
+SYMBOL_DISC = '\u25CF'.encode("utf-8")
+SYMBOL_DOWN_TRIANGLE = '\u25BC'.encode("utf-8")
+SYMBOL_UP_TRIANGLE = '\u25B2'.encode("utf-8")
 SYMBOL_DELETE = 'x'
-SYMBOL_HEART = u'\u2665'.encode("utf-8")
-SYMBOL_EXPERIENCE = u'\u2605'.encode("utf-8")
-SYMBOL_GOLD = u'\u25CF'.encode("utf-8")
-SYMBOL_MANA = u'\u2600'.encode("utf-8")
-SYMBOL_EDIT = u'\u270E'.encode("utf-8")
-SYMBOL_LEVEL = u'\u2949'.encode("utf-8")
-SYMBOL_DUE = u'\u29D6'.encode("utf-8")
-SYMBOL_CHALLENGE_FLAG = u'\u2691'.encode("utf-8")
+SYMBOL_HEART = '\u2665'.encode("utf-8")
+SYMBOL_EXPERIENCE = '\u2605'.encode("utf-8")
+SYMBOL_GOLD = '\u25CF'.encode("utf-8")
+SYMBOL_MANA = '\u2600'.encode("utf-8")
+SYMBOL_EDIT = '\u270E'.encode("utf-8")
+SYMBOL_LEVEL = '\u2949'.encode("utf-8")
+SYMBOL_DUE = '\u29D6'.encode("utf-8")
+SYMBOL_CHALLENGE_FLAG = '\u2691'.encode("utf-8")
 
 # Status Attributes
 HabitStatus = {'+': 0, '-': 0, SYMBOL_DELETE: False, SYMBOL_EDIT: False}
@@ -103,11 +103,11 @@ def ReadConfigFile():
         f = open(CONFIG_FILE, 'r')
     except:
         import sys
-        print "Enter UUID: ",
-        uuid = raw_input().strip()
-        print " "
-        print "Enter API-Key: ",
-        key = raw_input().strip()
+        print("Enter UUID: ", end=' ')
+        uuid = input().strip()
+        print(" ")
+        print("Enter API-Key: ", end=' ')
+        key = input().strip()
 
         f = open(CONFIG_FILE, 'w+')
         f.write("uuid="+uuid+"\n")
@@ -117,7 +117,7 @@ def ReadConfigFile():
 
         f = open(CONFIG_FILE, 'r')
 
-    for x in f.xreadlines():
+    for x in f:
         x = x[:-1].split("=")
         user_config[x[0]] = x[1]
 

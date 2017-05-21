@@ -8,12 +8,12 @@ import datetime
 
 # Custom Module Imports
 
-import config as C
-import global_objects as G
-import debug as DEBUG
-import helper as H
-import menu as M
-import content as CT
+from . import config as C
+from . import global_objects as G
+from . import debug as DEBUG
+from . import helper as H
+from . import menu as M
+from . import content as CT
 
 #Set up logging
 import logging
